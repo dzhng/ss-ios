@@ -2,7 +2,7 @@ SocketStream iOS library
 ========================
 
 Includes iOS implementation of the SocketStream protocol (in Stream.m) and Engine.io protocol (in Socket.m).
-Will read / store SocketStream SessionID, auto-reconnect when disconnected, and make RPC / PubSub calls
+Will read / store SocketStream SessionID, watchdog timer / activity timer, auto-reconnect when disconnected, and make RPC / PubSub calls
 
 To connect to localhost:9002, just run:
 
