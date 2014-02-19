@@ -54,6 +54,9 @@
 - (void)streamDidConnect:(Stream *)stream
 {
     NSLog(@"Stream did connect");
+    [stream rpc:@"hello.world" withParameters:nil andCallback:^(NSArray *params) {
+        NSLog(@"RPC call results: %@", params);
+    }];
 }
 
 - (void)streamDidDisconnect:(Stream *)stream

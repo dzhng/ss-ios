@@ -13,8 +13,9 @@ typedef void (^StreamCallback)(NSArray *params);
 
 @class Stream;
 
-@protocol StreamDelegate
+@protocol StreamDelegate <NSObject>
 
+@optional
 - (void)streamDidConnect:(Stream *)stream;
 - (void)streamDidReconnect:(Stream *)stream;
 - (void)streamDidDisconnect:(Stream *)stream;

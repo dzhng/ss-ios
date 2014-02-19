@@ -119,11 +119,16 @@ static const NSInteger kSessionMinLength = 20;
                 
                 NSNumber *rid = data[@"id"];
                 NSArray *results = data[@"p"];
-                StreamCallback callback = rpcCallbacks[rid];
-                
+                NSDictionary *err = data[@"e"];
                 NSLog(@"Got response for RPC call %@", rid);
                 
+                if (err) {
+                    NSLog(@"RPC call %@ error: %@", rid, err);
+                    break;
+                }
+                
                 // handle RPC call
+                StreamCallback callback = rpcCallbacks[rid];
                 if ([results isKindOfClass:[NSArray class]] && callback) {
                     callback(results);
                 }
@@ -163,7 +168,9 @@ static const NSInteger kSessionMinLength = 20;
 }
 
 - (void)didDisconnect {
-    [self.delegate streamDidConnect:self];
+    if ([self.delegate respondsToSelector:@selector(streamDidConnect:)]) {
+        [self.delegate streamDidDisconnect:self];
+    }
 }
 
 - (void)didReconnect {
@@ -175,7 +182,9 @@ static const NSInteger kSessionMinLength = 20;
         [self sendMessage:@"null" ofType:ResponderTypeSystem];
     }
     
-    [self.delegate streamDidReconnect:self];
+    if ([self.delegate respondsToSelector:@selector(streamDidReconnect:)]) {
+        [self.delegate streamDidReconnect:self];
+    }
 }
 
 - (void)didConnect {
@@ -187,7 +196,9 @@ static const NSInteger kSessionMinLength = 20;
         [self sendMessage:@"null" ofType:ResponderTypeSystem];
     }
     
-    [self.delegate streamDidConnect:self];
+    if ([self.delegate respondsToSelector:@selector(streamDidConnect:)]) {
+        [self.delegate streamDidConnect:self];
+    }
 }
 
 - (void)sendMessage:(NSString *)message ofType:(ResponderType)type
@@ -224,7 +235,7 @@ static const NSInteger kSessionMinLength = 20;
     NSDictionary *json = @{
         @"id": [NSNumber numberWithInteger:rpcId],
         @"m": method,
-        @"p": params,
+        @"p": params ?: @[],
     };
     NSError *error;
     NSData *data = [NSJSONSerialization dataWithJSONObject:json options:0 error:&error];
@@ -236,7 +247,9 @@ static const NSInteger kSessionMinLength = 20;
     [self sendMessage:message ofType:ResponderTypeRPC];
     
     // add callback to dictionary, with rpcId as key
-    rpcCallbacks[[NSNumber numberWithInteger:rpcId]] = callback;
+    if (callback) {
+        rpcCallbacks[[NSNumber numberWithInteger:rpcId]] = callback;
+    }
     
     // lastly, increment rpcId for next call
     rpcId++;
