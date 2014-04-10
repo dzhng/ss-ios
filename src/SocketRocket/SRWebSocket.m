@@ -284,6 +284,8 @@ typedef void (^data_callback)(SRWebSocket *webSocket,  NSData *data);
     
     NSArray *_requestedProtocols;
     SRIOConsumerPool *_consumerPool;
+    
+    NSString *connectionSid;
 }
 
 @synthesize delegate = _delegate;
@@ -517,6 +519,21 @@ static __strong NSData *CRLFCRLF;
 - (void)didConnect
 {
     SRFastLog(@"Connected");
+    
+    // Ad-hoc cookie generator
+    NSString *cookiePrefix = @"connect.sid=s%3A";
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    NSMutableString *cookiePostfix = [NSMutableString stringWithCapacity:51];
+    
+    for (int i = 0; i < 51; i++) {
+        [cookiePostfix appendFormat:@"%C", [letters characterAtIndex:arc4random() % [letters length]]];
+    }
+
+    connectionSid = [NSString stringWithFormat:@"%@/%@",cookiePrefix,cookiePostfix];
+    
+    
+    
+    
     CFHTTPMessageRef request = CFHTTPMessageCreateRequest(NULL, CFSTR("GET"), (__bridge CFURLRef)_url, kCFHTTPVersion1_1);
     
     // Set host first so it defaults
@@ -541,6 +558,8 @@ static __strong NSData *CRLFCRLF;
     [_urlRequest.allHTTPHeaderFields enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         CFHTTPMessageSetHeaderFieldValue(request, (__bridge CFStringRef)key, (__bridge CFStringRef)obj);
     }];
+    
+    CFHTTPMessageSetHeaderFieldValue(request, CFSTR("Cookie"), (__bridge CFStringRef) connectionSid);
     
     NSData *message = CFBridgingRelease(CFHTTPMessageCopySerializedMessage(request));
     

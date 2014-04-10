@@ -25,12 +25,12 @@ static const NSInteger kSessionMinLength = 20;
 
 - (NSString *)getSIDFromServerCookie:(NSString *)cookie
 {
-    NSArray *split = [cookie componentsSeparatedByString:@"."];
-    if (!split || split.count < 2) {
+    if(cookie.length < 15){
         return nil;
     }
+
     // append headers for the server
-    return [NSString stringWithFormat:@"s:%@.e", split[0]];
+    return [NSString stringWithFormat:@"s:%@.e", cookie];
 }
 
 - (BOOL)isValidSID:(NSString *)sid
@@ -80,7 +80,33 @@ static const NSInteger kSessionMinLength = 20;
         // seperate out the message type and data
         NSArray *split = [message componentsSeparatedByString:@"|"];
         if (split.count < 2) {
+            if([split[0] characterAtIndex:0] == '{')
+            {
+                NSDictionary* parsed = [NSJSONSerialization JSONObjectWithData:[split[0] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+                NSString *preSessionId = [parsed objectForKey:@"sid"];
+                
+                // set session ID
+                sessionId = [self getSIDFromServerCookie:preSessionId];
+                if (sessionId) {
+                    NSLog(@"New sessionID set: %@", sessionId);
+                    
+                    [self sendMessage:sessionId ofType:ResponderTypeSystem];
+                    // save new session cookie
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    [defaults setObject:sessionId forKey:kSessionIDKey];
+                    [defaults synchronize];
+                }
+                else{
+                    sessionId = [self getSIDFromServerCookie:preSessionId];
+                    NSLog(@"Not New sessionID set: %@", sessionId);
+                }
+                
+            }else{
+                NSLog(@"el split es mas de 2");
+            }
             return;
+        
+
         }
         
         ResponderType type = [split[0] characterAtIndex:0];
@@ -96,6 +122,8 @@ static const NSInteger kSessionMinLength = 20;
                     return;
                 }
                 
+                NSLog(@"Event received is %@",data);
+                
                 NSString *channel = data[@"e"];
                 NSArray *results = data[@"p"];
                 NSArray *callbackArray = bindCallbacks[channel];
@@ -104,6 +132,7 @@ static const NSInteger kSessionMinLength = 20;
                         StreamCallback callback = (StreamCallback)callbackArray[i];
                         callback(results);
                     }
+                    
                 }
                 
                 break;
@@ -121,7 +150,6 @@ static const NSInteger kSessionMinLength = 20;
                 NSArray *results = data[@"p"];
                 NSDictionary *err = data[@"e"];
                 NSLog(@"Got response for RPC call %@", rid);
-                
                 if (err) {
                     NSLog(@"RPC call %@ error: %@", rid, err);
                     break;
@@ -227,6 +255,7 @@ static const NSInteger kSessionMinLength = 20;
     }
     [callbackArray addObject:callback];
     bindCallbacks[channel] = callbackArray;
+   
 }
 
 - (void)rpc:(NSString *)method withParameters:(NSArray *)params andCallback:(StreamCallback)callback
