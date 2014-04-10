@@ -102,7 +102,7 @@ static const NSInteger kSessionMinLength = 20;
                 }
                 
             }else{
-                NSLog(@"el split es mas de 2");
+                NSLog(@"The split is more than 2");
             }
             return;
         
