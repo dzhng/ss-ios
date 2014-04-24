@@ -13,7 +13,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // establish connection with localhost
-    stream = [[Stream alloc] initWithHost:@"localhost" port:9002 secure:NO];
+    stream = [[Stream alloc] initWithHost:@"localhost" port:3000 secure:NO];
     stream.delegate = self;
     [stream connectToServer];
     
@@ -54,9 +54,11 @@
 - (void)streamDidConnect:(Stream *)stream
 {
     NSLog(@"Stream did connect");
-    [stream rpc:@"hello.world" withParameters:nil andCallback:^(NSArray *params) {
+    
+    [stream rpc:@"demo.sendMessage" withParameters:@[@"Hello World"] andCallback:^(NSArray *params) {
         NSLog(@"RPC call results: %@", params);
     }];
+    
 }
 
 - (void)streamDidDisconnect:(Stream *)stream

@@ -246,6 +246,9 @@ static const NSInteger kReconnectInterval = 2000;
                 [self performPingAtInterval:pingInterval];
                 [self setupWatchdogAtInterval:pingTimeout];
                 [self kickWatchdog];
+                NSString *gotSid;
+                gotSid = [NSString stringWithFormat:@"s:%@.e", sid];
+                [self.delegate didReceiveMessage:data];
                 break;
             }
             case PacketTypeClose: { // close packet

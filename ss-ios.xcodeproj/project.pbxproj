@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CF56018190949B4002EC54C /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF56017190949B4002EC54C /* SRWebSocket.m */; };
 		63CD356418B43BBB00B0FEFF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD356318B43BBB00B0FEFF /* Foundation.framework */; };
 		63CD356618B43BBB00B0FEFF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD356518B43BBB00B0FEFF /* CoreGraphics.framework */; };
 		63CD356818B43BBB00B0FEFF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD356718B43BBB00B0FEFF /* UIKit.framework */; };
@@ -21,9 +22,6 @@
 		63CD358518B43BBB00B0FEFF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD356718B43BBB00B0FEFF /* UIKit.framework */; };
 		63CD359D18B43C0A00B0FEFF /* Socket.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD359A18B43C0A00B0FEFF /* Socket.m */; };
 		63CD359E18B43C0A00B0FEFF /* Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD359C18B43C0A00B0FEFF /* Stream.m */; };
-		63CD35AA18B4401200B0FEFF /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 63CD35A318B4401200B0FEFF /* base64.c */; };
-		63CD35AB18B4401200B0FEFF /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD35A618B4401200B0FEFF /* NSData+SRB64Additions.m */; };
-		63CD35AC18B4401200B0FEFF /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD35A918B4401200B0FEFF /* SRWebSocket.m */; };
 		63CD35AF18B4401A00B0FEFF /* TimerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD35AE18B4401A00B0FEFF /* TimerService.m */; };
 		63CD35B118B440CE00B0FEFF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD35B018B440CE00B0FEFF /* libicucore.dylib */; };
 		63CD35B318B440D500B0FEFF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD35B218B440D500B0FEFF /* CFNetwork.framework */; };
@@ -41,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3CF56015190949B4002EC54C /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		3CF56016190949B4002EC54C /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		3CF56017190949B4002EC54C /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		63CD356018B43BBB00B0FEFF /* ss-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ss-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CD356318B43BBB00B0FEFF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		63CD356518B43BBB00B0FEFF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -63,13 +64,6 @@
 		63CD359C18B43C0A00B0FEFF /* Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Stream.m; path = src/Stream.m; sourceTree = "<group>"; };
 		63CD359F18B43D7800B0FEFF /* StreamPackets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StreamPackets.h; path = src/StreamPackets.h; sourceTree = "<group>"; };
 		63CD35A018B43F9D00B0FEFF /* SocketPackets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SocketPackets.h; path = src/SocketPackets.h; sourceTree = "<group>"; };
-		63CD35A318B4401200B0FEFF /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = base64.c; path = src/SocketRocket/base64.c; sourceTree = "<group>"; };
-		63CD35A418B4401200B0FEFF /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = base64.h; path = src/SocketRocket/base64.h; sourceTree = "<group>"; };
-		63CD35A518B4401200B0FEFF /* NSData+SRB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+SRB64Additions.h"; path = "src/SocketRocket/NSData+SRB64Additions.h"; sourceTree = "<group>"; };
-		63CD35A618B4401200B0FEFF /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+SRB64Additions.m"; path = "src/SocketRocket/NSData+SRB64Additions.m"; sourceTree = "<group>"; };
-		63CD35A718B4401200B0FEFF /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SocketRocket-Prefix.pch"; path = "src/SocketRocket/SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
-		63CD35A818B4401200B0FEFF /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = src/SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
-		63CD35A918B4401200B0FEFF /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = src/SocketRocket/SRWebSocket.m; sourceTree = "<group>"; };
 		63CD35AD18B4401A00B0FEFF /* TimerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimerService.h; path = src/TimerService/TimerService.h; sourceTree = "<group>"; };
 		63CD35AE18B4401A00B0FEFF /* TimerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimerService.m; path = src/TimerService/TimerService.m; sourceTree = "<group>"; };
 		63CD35B018B440CE00B0FEFF /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -104,11 +98,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3CF56014190949B4002EC54C /* SocketRocket */ = {
+			isa = PBXGroup;
+			children = (
+				3CF56015190949B4002EC54C /* SocketRocket-Prefix.pch */,
+				3CF56016190949B4002EC54C /* SRWebSocket.h */,
+				3CF56017190949B4002EC54C /* SRWebSocket.m */,
+			);
+			path = SocketRocket;
+			sourceTree = "<group>";
+		};
 		63CD355718B43BBB00B0FEFF = {
 			isa = PBXGroup;
 			children = (
+				3CF56014190949B4002EC54C /* SocketRocket */,
 				63CD35A218B43FFE00B0FEFF /* TimerService */,
-				63CD35A118B43FF800B0FEFF /* SocketRocket */,
 				63CD359818B43C0000B0FEFF /* src */,
 				63CD356918B43BBB00B0FEFF /* ss-ios */,
 				63CD356218B43BBB00B0FEFF /* Frameworks */,
@@ -177,20 +181,6 @@
 			name = src;
 			sourceTree = "<group>";
 		};
-		63CD35A118B43FF800B0FEFF /* SocketRocket */ = {
-			isa = PBXGroup;
-			children = (
-				63CD35A318B4401200B0FEFF /* base64.c */,
-				63CD35A418B4401200B0FEFF /* base64.h */,
-				63CD35A518B4401200B0FEFF /* NSData+SRB64Additions.h */,
-				63CD35A618B4401200B0FEFF /* NSData+SRB64Additions.m */,
-				63CD35A718B4401200B0FEFF /* SocketRocket-Prefix.pch */,
-				63CD35A818B4401200B0FEFF /* SRWebSocket.h */,
-				63CD35A918B4401200B0FEFF /* SRWebSocket.m */,
-			);
-			name = SocketRocket;
-			sourceTree = "<group>";
-		};
 		63CD35A218B43FFE00B0FEFF /* TimerService */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +237,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "David Zhang";
 				TargetAttributes = {
+					63CD355F18B43BBB00B0FEFF = {
+						DevelopmentTeam = 2LZE579GB3;
+					};
 					63CD358018B43BBB00B0FEFF = {
 						TestTargetID = 63CD355F18B43BBB00B0FEFF;
 					};
@@ -297,13 +290,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				63CD359E18B43C0A00B0FEFF /* Stream.m in Sources */,
-				63CD35AB18B4401200B0FEFF /* NSData+SRB64Additions.m in Sources */,
 				63CD359D18B43C0A00B0FEFF /* Socket.m in Sources */,
 				63CD357A18B43BBB00B0FEFF /* ViewController.m in Sources */,
 				63CD35AF18B4401A00B0FEFF /* TimerService.m in Sources */,
-				63CD35AC18B4401200B0FEFF /* SRWebSocket.m in Sources */,
+				3CF56018190949B4002EC54C /* SRWebSocket.m in Sources */,
 				63CD357418B43BBB00B0FEFF /* AppDelegate.m in Sources */,
-				63CD35AA18B4401200B0FEFF /* base64.c in Sources */,
 				63CD357018B43BBB00B0FEFF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +413,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ss-ios/ss-ios-Prefix.pch";
 				INFOPLIST_FILE = "ss-ios/ss-ios-Info.plist";
@@ -435,6 +427,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ss-ios/ss-ios-Prefix.pch";
 				INFOPLIST_FILE = "ss-ios/ss-ios-Info.plist";
